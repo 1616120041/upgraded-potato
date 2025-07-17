@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>舞蹈视频播放</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#FF69B4', // 粉色主题
+          },
+        },
+      }
+    }
+  </script>
+  
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .video-container {
+        aspect-ratio: 16 / 9;
+      }
+      .play-btn-hover {
+        transition: all 0.3s ease;
+      }
+      .play-btn-hover:hover {
+        transform: scale(1.1);
+        box-shadow: 0 0 20px rgba(255, 105, 180, 0.6);
+      }
+    }
+  </style>
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center p-4">
+  <div class="max-w-4xl w-full bg-white rounded-xl shadow-lg overflow-hidden">
+    <!-- 视频容器 -->
+    <div class="relative video-container bg-gray-900">
+      <!-- 视频元素（替换src为你的视频路径） -->
+      <video id="danceVideo" class="w-full h-full object-cover hidden" controls>
+        <source src="C:\Users\28384\Downloads\mmexport1752761961601.mp4" type="video/mp4">
+        你的浏览器不支持视频播放
+      </video>
+      
+      <!-- 视频封面（可替换为视频截图） -->
+      <div id="videoCover" class="absolute inset-0 flex items-center justify-center">
+        <img src="https://imgs.qiubiaoqing.com/qiubiaoqing/user_pre_up_imgs/6842afbb67c94394.jpg?imageView2/1/w/80/h/80" alt="视频封面" class="w-full h-full object-cover opacity-90">
+        
+        <!-- 播放按钮 -->
+        <button id="playBtn" class="absolute w-20 h-20 md:w-24 md:h-24 rounded-full bg-primary/90 text-white flex items-center justify-center play-btn-hover">
+          <<i class="fa fa-play text-3xl md:text-4xl ml-2"></</i>
+        </button>
+      </div>
+    </div>
+    
+    <!-- 视频信息 -->
+    <div class="p-5">
+      <h2 class="text-xl font-bold text-gray-800 mb-2">金发粉裙女子热舞视频爆出</h2>
+      <p class="text-gray-600 text-sm">点击播放按钮观看完整视频(我不行了)</p>
+    </div>
+  </div>
+
+  <script>
+    // 播放按钮交互
+    const playBtn = document.getElementById('playBtn');
+    const videoCover = document.getElementById('videoCover');
+    const danceVideo = document.getElementById('danceVideo');
+    
+    playBtn.addEventListener('click', () => {
+      // 隐藏封面和按钮，显示并播放视频
+      videoCover.classList.add('hidden');
+      danceVideo.classList.remove('hidden');
+      danceVideo.play();
+    });
+    
+    // 视频结束后显示封面
+    danceVideo.addEventListener('ended', () => {
+      danceVideo.classList.add('hidden');
+      videoCover.classList.remove('hidden');
+    });
+  </script>
+</body>
+</html>
